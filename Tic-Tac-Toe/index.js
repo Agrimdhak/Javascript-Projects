@@ -30,6 +30,7 @@ cells.forEach((cell) => {
         }
         cell.classList.add("clicked")
         checkWinner();
+        draw();
     })
 })
 
@@ -53,12 +54,30 @@ const showWinner = (winner) => {
     msgContainer.classList.remove("hide");
 }
 
+const draw = () => {
+    let filledCells = 0;
+
+    cells.forEach((cell) => {
+        if(cell.innerText !== "") {
+            filledCells++;
+        }
+    }); 
+
+    if(filledCells === 9 && !gameOver) {
+        gameOver = true;
+        newMsg.innerText = "The game is draw. Play Again!"
+        msgContainer.classList.remove("hide");
+    }
+}
+
+
 const newGame = () => {
     cells.forEach((cell) => {
         cell.innerText = "";
         cell.classList.remove("clicked")
         newMsg.innerText = "";
         gameOver = false;
+        turnO = true;
     })
    
 }
